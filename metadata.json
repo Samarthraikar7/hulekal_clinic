@@ -1,0 +1,6 @@
+{
+  "name": "Hulekal Clinic",
+  "description": "Comprehensive clinic management and online consultation platform for Hulekal Clinic (Dr. Manjushree Ramachandra V) with appointments, telemedicine, prescriptions, patient records, and administration.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
