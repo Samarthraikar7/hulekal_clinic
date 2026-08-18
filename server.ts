@@ -8,7 +8,19 @@ import { apiRouter } from './server/api';
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+
+  // Configurable CORS handling
+  app.use((req, res, next) => {
+    const allowedOrigin = process.env.FRONTEND_URL || process.env.APP_URL || '*';
+    res.header('Access-Control-Allow-Origin', allowedOrigin === '*' ? '*' : allowedOrigin);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    if (req.method === 'OPTIONS') {
+      return res.sendStatus(200);
+    }
+    next();
+  });
 
   // JSON & URL-encoded body parsers
   app.use(express.json());
@@ -22,10 +34,11 @@ async function startServer() {
     next();
   });
 
-  // Mount API router
-  app.use('/api', apiRouter);
+  // Public Health check endpoints (Render / Deployment status verification)
+  app.get('/health', (req, res) => {
+    res.json({ status: 'ok' });
+  });
 
-  // Health check
   app.get('/api/health', (req, res) => {
     res.json({
       status: 'ok',
@@ -33,6 +46,9 @@ async function startServer() {
       timestamp: new Date().toISOString()
     });
   });
+
+  // Mount API router
+  app.use('/api', apiRouter);
 
   // Vite middleware for development vs static build in production
   if (process.env.NODE_ENV !== 'production') {

@@ -43,6 +43,7 @@ export function getDoctorPatientWhatsAppUrl(patientPhone: string, message: strin
  * Generate WhatsApp link for prescription sharing
  */
 export function getPrescriptionWhatsAppUrl(prescription: Prescription): string {
+  const appUrl = import.meta.env.VITE_APP_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000');
   const text = `Namaste!
 Official Digital Prescription Ref: ${prescription.prescriptionNo}
 Patient Name: ${prescription.patientName}
@@ -50,7 +51,7 @@ Date: ${prescription.date}
 Diagnosis: ${prescription.diagnosis}
 Doctor: Dr. Manjushree Ramachandra V (Reg. 57749)
 
-Link to Prescription Archive: http://localhost:3000/#patient-dashboard`;
+Link to Prescription Archive: ${appUrl}/#patient-dashboard`;
 
   return `https://wa.me/${CLINIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 }
