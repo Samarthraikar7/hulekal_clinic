@@ -31,7 +31,7 @@ export async function sendNewAppointmentEmail(appointment: Appointment, patientE
 
     const meetingInfo = appointment.consultationType === 'ONLINE' && appointment.meetingUrl
       ? `<p><strong>Video Consultation Link (Jitsi):</strong> <a href="${appointment.meetingUrl}">${appointment.meetingUrl}</a></p>`
-      : '<p><strong>Location:</strong> MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India</p>';
+      : '<p><strong>Location:</strong> Hulekal clinic, MQX6+96C, Vanalli Rd, Hancharata, Karnataka 581336 Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India</p>';
 
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px;">
@@ -83,7 +83,7 @@ export async function sendAppointmentConfirmationEmail(appointment: Appointment,
 
     const meetingInfo = appointment.consultationType === 'ONLINE' && appointment.meetingUrl
       ? `<p><strong>Join Video Consultation Room (Jitsi):</strong> <a href="${appointment.meetingUrl}">${appointment.meetingUrl}</a></p>`
-      : '<p><strong>Clinic Address:</strong> MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India</p>';
+      : '<p><strong>Clinic Address:</strong> Hulekal clinic, MQX6+96C, Vanalli Rd, Hancharata, Karnataka 581336 Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India</p>';
 
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px;">

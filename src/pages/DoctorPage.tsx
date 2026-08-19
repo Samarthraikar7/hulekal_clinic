@@ -205,9 +205,9 @@ export const DoctorPage: React.FC<DoctorPageProps> = ({ onNavigate }) => {
             </div>
 
             <p className="text-xs text-slate-200 leading-relaxed">
-              <strong>MQX6+96C, Vanalli Rd</strong>
+              <strong>Hulekal clinic, MQX6+96C, Vanalli Rd</strong>
               <br />
-              Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India
+              Hancharata, Karnataka 581336 Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India
             </p>
 
             <div className="pt-2">

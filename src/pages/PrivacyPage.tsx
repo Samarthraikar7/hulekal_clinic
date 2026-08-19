@@ -63,7 +63,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onNavigate }) => {
         <section className="space-y-2">
           <h3 className="text-base font-bold text-slate-900">4. Contact & Inquiries</h3>
           <p>
-            For any privacy inquiries or record requests, contact us at <strong>+91 94837 87702</strong> or visit Hulekal Clinic, MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India.
+            For any privacy inquiries or record requests, contact us at <strong>+91 94837 87702</strong> or visit Hulekal clinic, MQX6+96C, Vanalli Rd, Hancharata, Karnataka 581336 Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India.
           </p>
         </section>
       </div>

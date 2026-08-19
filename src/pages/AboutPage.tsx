@@ -120,7 +120,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
             <MapPin className="w-6 h-6 text-rose-600 mx-auto" />
             <h5 className="font-bold text-slate-900">Sirsi Hancharata Location</h5>
-            <p className="text-slate-600">MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India.</p>
+            <p className="text-slate-600">Hulekal clinic, MQX6+96C, Vanalli Rd, Hancharata, Karnataka 581336 Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India.</p>
           </div>
 
           <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">

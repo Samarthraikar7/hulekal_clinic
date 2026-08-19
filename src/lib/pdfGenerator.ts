@@ -23,7 +23,7 @@ export function generatePrescriptionPDF(prescription: Prescription, settings?: C
   doc.setFontSize(9);
   doc.setFont('helvetica', 'normal');
   doc.text('Quality Healthcare for the Whole Family', 14, 23);
-  doc.text('MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India', 14, 29);
+  doc.text('Hulekal clinic, MQX6+96C, Vanalli Rd, Hancharata, Karnataka 581336 Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India', 14, 29);
   doc.text('Contact: +91 94837 87702 | Timing: 9:30 AM - 6:30 PM', 14, 34);
 
   // Doctor Details Badge on Right
@@ -232,7 +232,7 @@ export function generateAppointmentReceiptPDF(appointment: Appointment, settings
   doc.setFontSize(9);
   doc.setFont('helvetica', 'normal');
   doc.text('Quality Healthcare for the Whole Family', 14, 22);
-  doc.text('MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India', 14, 28);
+  doc.text('Hulekal clinic, MQX6+96C, Vanalli Rd, Hancharata, Karnataka 581336 Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India', 14, 28);
 
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');

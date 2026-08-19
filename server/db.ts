@@ -35,7 +35,7 @@ const defaultClinicSettings: ClinicSettings = {
     taluk: 'Tq: Sirsi',
     district: 'Sirsi, Karnataka',
     pincode: '581336',
-    fullFormatted: 'MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India'
+    fullFormatted: 'Hulekal clinic, MQX6+96C, Vanalli Rd, Hancharata, Karnataka 581336 Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India'
   },
   consultationTiming: '9:30 AM – 6:30 PM',
   workingHours: {

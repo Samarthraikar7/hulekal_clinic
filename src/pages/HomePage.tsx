@@ -82,7 +82,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     },
     {
       q: 'Where is Hulekal Clinic located?',
-      a: 'We are located at MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India.'
+      a: 'We are located at Hulekal clinic, MQX6+96C, Vanalli Rd, Hancharata, Karnataka 581336 Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India.'
     },
     {
       q: 'Can I download digital prescriptions after my consultation?',
@@ -580,9 +580,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <div className="p-4 bg-white rounded-2xl border border-slate-200 space-y-2">
                   <p className="font-bold text-slate-900 text-sm">HULEKAL CLINIC</p>
                   <p className="leading-relaxed">
-                    MQX6+96C, Vanalli Rd
+                    MQX6+96C, Vanalli Rd, Hancharata
                     <br />
-                    Hancharata, Tq: Sirsi
+                    Karnataka 581336 Hancharata, Tq: Sirsi
                     <br />
                     Sirsi, Karnataka 581336, India
                   </p>

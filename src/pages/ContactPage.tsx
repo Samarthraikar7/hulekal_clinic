@@ -80,9 +80,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 <div>
                   <span className="font-bold text-slate-900 block text-sm">Clinic Address</span>
                   <p className="text-slate-600 leading-relaxed mt-0.5">
-                    MQX6+96C, Vanalli Rd
+                    Hulekal clinic, MQX6+96C, Vanalli Rd
                     <br />
-                    Hancharata, Tq: Sirsi
+                    Hancharata, Karnataka 581336 Hancharata, Tq: Sirsi
                     <br />
                     Sirsi, Karnataka 581336, India
                   </p>
