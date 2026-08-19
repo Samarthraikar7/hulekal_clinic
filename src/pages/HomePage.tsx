@@ -603,17 +603,27 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
 
             {/* Map Frame */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 space-y-3">
               <div className="w-full h-80 rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-200 relative">
                 <iframe
                   title="Hulekal Clinic Location Map"
-                  src="https://maps.google.com/maps?q=MQX6%2B96C+Vanalli+Rd+Hancharata+Karnataka+581336+Sirsi&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  src="https://maps.google.com/maps?q=Hulekal+clinic,+MQX6%2B96C,+Vanalli+Rd,+Sirsi,+Karnataka&t=&z=16&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen={false}
                   loading="lazy"
                 ></iframe>
+              </div>
+              <div className="text-right">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Hulekal+clinic+MQX6%2B96C+Sirsi+Karnataka"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0f3b60] hover:text-emerald-700 underline"
+                >
+                  <span>📍 Open Hulekal Clinic Pin in Google Maps App</span>
+                </a>
               </div>
             </div>
           </div>
