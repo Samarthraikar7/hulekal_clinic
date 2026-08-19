@@ -31,7 +31,7 @@ export async function sendNewAppointmentEmail(appointment: Appointment, patientE
 
     const meetingInfo = appointment.consultationType === 'ONLINE' && appointment.meetingUrl
       ? `<p><strong>Video Consultation Link (Jitsi):</strong> <a href="${appointment.meetingUrl}">${appointment.meetingUrl}</a></p>`
-      : '<p><strong>Location:</strong> Ground Floor, Shop No. 3, Vanalli Road, Ramnagar, Hulekal Village, Sirsi – 581336</p>';
+      : '<p><strong>Location:</strong> MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India</p>';
 
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px;">
@@ -52,7 +52,7 @@ export async function sendNewAppointmentEmail(appointment: Appointment, patientE
         </table>
         ${meetingInfo}
         <p style="font-size: 12px; color: #64748b; margin-top: 24px; border-top: 1px solid #e2e8f0; padding-top: 12px;">
-          Hulekal Clinic • Vanalli Road, Ramnagar, Hulekal Village, Sirsi • Phone: +91 94837 87702
+          Hulekal Clinic • MQX6+96C, Vanalli Rd, Hancharata, Sirsi 581336 • Phone: +91 94837 87702
         </p>
       </div>
     `;
@@ -83,7 +83,7 @@ export async function sendAppointmentConfirmationEmail(appointment: Appointment,
 
     const meetingInfo = appointment.consultationType === 'ONLINE' && appointment.meetingUrl
       ? `<p><strong>Join Video Consultation Room (Jitsi):</strong> <a href="${appointment.meetingUrl}">${appointment.meetingUrl}</a></p>`
-      : '<p><strong>Clinic Address:</strong> Ground Floor, Shop No. 3, Hancharata, Vanalli Road, Ramnagar, Hulekal Village, Sirsi – 581336</p>';
+      : '<p><strong>Clinic Address:</strong> MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India</p>';
 
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px;">

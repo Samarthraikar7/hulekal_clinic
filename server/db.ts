@@ -27,15 +27,15 @@ const defaultClinicSettings: ClinicSettings = {
   doctorName: 'Dr. Manjushree Ramachandra V',
   doctorRegNo: '57749',
   address: {
-    village: 'Hulekal Village',
-    area: 'Ramnagar',
-    road: 'Vanalli Road',
-    shopNo: 'Ground Floor, Shop No. 3',
+    village: 'Hancharata',
+    area: 'MQX6+96C',
+    road: 'Vanalli Rd',
+    shopNo: 'MQX6+96C',
     hancharata: 'Hancharata',
     taluk: 'Tq: Sirsi',
-    district: 'Dist: Uttara Kannada',
+    district: 'Sirsi, Karnataka',
     pincode: '581336',
-    fullFormatted: 'Hulekal Village, Ramnagar, Vanalli Road, Ground Floor, Shop No. 3, Hancharata, Tq: Sirsi, Dist: Uttara Kannada – 581336'
+    fullFormatted: 'MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India'
   },
   consultationTiming: '9:30 AM – 6:30 PM',
   workingHours: {

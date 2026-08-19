@@ -106,21 +106,21 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <h3 className="text-2xl font-bold text-[#0f3b60]">Visit Our Clinic in Sirsi</h3>
           <p className="text-xs text-slate-600">
-            Conveniently located on Vanalli Road in Hulekal village with comfortable waiting facilities and diagnostic equipment.
+            Conveniently located at MQX6+96C on Vanalli Road, Hancharata with comfortable waiting facilities.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center text-xs">
           <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
             <Building className="w-6 h-6 text-[#0f3b60] mx-auto" />
-            <h5 className="font-bold text-slate-900">Ground Floor Access</h5>
-            <p className="text-slate-600">Shop No. 3, Ground Floor for easy accessibility by elderly patients.</p>
+            <h5 className="font-bold text-slate-900">Easy Clinic Access</h5>
+            <p className="text-slate-600">MQX6+96C, Vanalli Rd for easy wheelchair and elderly patient access.</p>
           </div>
 
           <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
             <MapPin className="w-6 h-6 text-rose-600 mx-auto" />
-            <h5 className="font-bold text-slate-900">Central Ramnagar Location</h5>
-            <p className="text-slate-600">Hancharata, Vanalli Road, Hulekal Village, Tq: Sirsi, Dist: Uttara Kannada – 581336.</p>
+            <h5 className="font-bold text-slate-900">Sirsi Hancharata Location</h5>
+            <p className="text-slate-600">MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India.</p>
           </div>
 
           <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">

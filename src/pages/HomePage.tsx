@@ -82,7 +82,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     },
     {
       q: 'Where is Hulekal Clinic located?',
-      a: 'We are located at Ground Floor, Shop No. 3, Hancharata, Vanalli Road, Ramnagar, Hulekal Village, Tq: Sirsi, Dist: Uttara Kannada – 581336.'
+      a: 'We are located at MQX6+96C, Vanalli Rd, Hancharata, Tq: Sirsi, Sirsi, Karnataka 581336, India.'
     },
     {
       q: 'Can I download digital prescriptions after my consultation?',
@@ -580,13 +580,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <div className="p-4 bg-white rounded-2xl border border-slate-200 space-y-2">
                   <p className="font-bold text-slate-900 text-sm">HULEKAL CLINIC</p>
                   <p className="leading-relaxed">
-                    Hulekal Village, Ramnagar
-                    <br />
-                    Vanalli Road, Ground Floor, Shop No. 3
+                    MQX6+96C, Vanalli Rd
                     <br />
                     Hancharata, Tq: Sirsi
                     <br />
-                    Dist: Uttara Kannada – 581336
+                    Sirsi, Karnataka 581336, India
                   </p>
                 </div>
 
@@ -609,7 +607,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div className="w-full h-80 rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-200 relative">
                 <iframe
                   title="Hulekal Clinic Location Map"
-                  src="https://maps.google.com/maps?q=Hulekal+Sirsi+Uttara+Kannada&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                  src="https://maps.google.com/maps?q=MQX6%2B96C+Vanalli+Rd+Hancharata+Karnataka+581336+Sirsi&t=&z=16&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

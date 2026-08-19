@@ -140,13 +140,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <div className="flex items-start gap-2.5 text-sm text-slate-300">
               <MapPin className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
               <p className="leading-snug">
-                <strong>Hulekal Village, Ramnagar</strong>
-                <br />
-                Vanalli Road, Ground Floor, Shop No. 3
+                <strong>MQX6+96C, Vanalli Rd</strong>
                 <br />
                 Hancharata, Tq: Sirsi
                 <br />
-                Dist: Uttara Kannada – 581336
+                Sirsi, Karnataka 581336, India
               </p>
             </div>
 

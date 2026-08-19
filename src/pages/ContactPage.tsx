@@ -80,13 +80,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 <div>
                   <span className="font-bold text-slate-900 block text-sm">Clinic Address</span>
                   <p className="text-slate-600 leading-relaxed mt-0.5">
-                    Hulekal Village, Ramnagar
-                    <br />
-                    Vanalli Road, Ground Floor, Shop No. 3
+                    MQX6+96C, Vanalli Rd
                     <br />
                     Hancharata, Tq: Sirsi
                     <br />
-                    Dist: Uttara Kannada – 581336
+                    Sirsi, Karnataka 581336, India
                   </p>
                 </div>
               </div>
@@ -245,7 +243,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           <div className="w-full h-64 rounded-3xl overflow-hidden shadow-md border border-slate-200 bg-slate-100">
             <iframe
               title="Hulekal Clinic Location Map"
-              src="https://maps.google.com/maps?q=Hulekal+Sirsi+Uttara+Kannada&t=&z=14&ie=UTF8&iwloc=&output=embed"
+              src="https://maps.google.com/maps?q=MQX6%2B96C+Vanalli+Rd+Hancharata+Karnataka+581336+Sirsi&t=&z=16&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
