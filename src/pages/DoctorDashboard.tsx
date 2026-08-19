@@ -349,12 +349,8 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onNavigate, on
 
                         <td className="p-3.5">
                           <div className="font-semibold text-slate-800">{apt.serviceName}</div>
-                          <span className={`inline-block mt-0.5 px-2 py-0.5 rounded text-[10px] font-bold ${
-                            apt.consultationType === 'ONLINE'
-                              ? 'bg-emerald-100 text-emerald-800'
-                              : 'bg-sky-100 text-[#0f3b60]'
-                          }`}>
-                            {apt.consultationType === 'ONLINE' ? 'Video Call' : 'In-Clinic (Sirsi)'}
+                          <span className="inline-block mt-0.5 px-2 py-0.5 rounded text-[10px] font-bold bg-sky-100 text-[#0f3b60]">
+                            In-Clinic (Sirsi)
                           </span>
                         </td>
 
@@ -386,18 +382,6 @@ export const DoctorDashboard: React.FC<DoctorDashboardProps> = ({ onNavigate, on
                             <Phone className="w-3 h-3 text-emerald-600" />
                             <span>WhatsApp</span>
                           </a>
-
-                          {apt.consultationType === 'ONLINE' && (
-                            <a
-                              href={apt.meetingUrl || `https://meet.jit.si/HulekalClinic-Appointment-${apt.id}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[11px] inline-flex items-center gap-1"
-                            >
-                              <Video className="w-3 h-3" />
-                              <span>Join Jitsi Video</span>
-                            </a>
-                          )}
 
                           <button
                             onClick={() => handleStartRxForApt(apt)}

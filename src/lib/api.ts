@@ -90,19 +90,10 @@ export const api = {
   }>(`/slots/available?date=${date}${doctorId ? `&doctorId=${doctorId}` : ''}`),
 
   // Appointments
-  createAppointmentOrder: (payload: any) => request<{
+  createAppointment: (payload: any) => request<{
     message: string;
     appointment: Appointment;
-    razorpay: any;
-  }>('/appointments/create-order', {
-    method: 'POST',
-    body: JSON.stringify(payload)
-  }),
-
-  verifyPayment: (payload: any) => request<{
-    message: string;
-    appointment: Appointment;
-  }>('/appointments/verify-payment', {
+  }>('/appointments', {
     method: 'POST',
     body: JSON.stringify(payload)
   }),
@@ -111,26 +102,9 @@ export const api = {
 
   getAppointmentById: (id: string) => request<{ appointment: Appointment; prescription?: Prescription }>(`/appointments/${id}`),
 
-  getRoomAccess: (appointmentId: string) => request<{
-    status: 'GRANTED' | 'BLOCKED' | 'DENIED';
-    reason?: string;
-    error?: string;
-    message?: string;
-    roomUrl?: string;
-    role?: string;
-  }>(`/consultation/room-access/${appointmentId}`),
-
   cancelAppointment: (id: string, reason?: string) => request<{ message: string; appointment: Appointment }>(`/appointments/${id}/cancel`, {
     method: 'POST',
     body: JSON.stringify({ reason })
-  }),
-
-  payAtClinic: (id: string) => request<{ message: string; appointment: Appointment }>(`/appointments/${id}/pay-at-clinic`, {
-    method: 'POST'
-  }),
-
-  payViaUpi: (id: string) => request<{ message: string; appointment: Appointment }>(`/appointments/${id}/pay-via-upi`, {
-    method: 'POST'
   }),
 
   // Doctor Flow

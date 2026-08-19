@@ -59,7 +59,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </div>
             <div className="flex items-center gap-2.5">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Zero-friction telehealth video consultation for patients living at a distance</span>
+              <span>Guaranteed time slots with zero waiting time at the clinic</span>
             </div>
           </div>
         </div>

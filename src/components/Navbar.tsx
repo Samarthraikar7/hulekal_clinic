@@ -151,15 +151,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenA
         {/* Action Buttons & Auth */}
         <div className="hidden sm:flex items-center gap-3">
           <button
-            onClick={() => onNavigate('book-appointment', { type: 'ONLINE' })}
-            className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-[#0f3b60] bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-lg transition-colors shadow-2xs"
-          >
-            <Video className="w-4 h-4 text-emerald-600" />
-            <span>Online Consult</span>
-          </button>
-
-          <button
-            onClick={() => onNavigate('book-appointment', { type: 'IN_CLINIC' })}
+            onClick={() => onNavigate('book-appointment')}
             className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-[#0f3b60] hover:bg-[#0c2f4d] rounded-lg transition-colors shadow-md shadow-sky-900/15"
           >
             <Calendar className="w-4 h-4 text-emerald-400" />
@@ -274,7 +266,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenA
               className="w-full py-2.5 bg-[#0f3b60] text-white font-semibold text-sm rounded-lg flex items-center justify-center gap-2"
             >
               <Calendar className="w-4 h-4 text-emerald-300" />
-              <span>Book Appointment (In-Clinic or Online)</span>
+              <span>Book Appointment</span>
             </button>
 
             {user ? (

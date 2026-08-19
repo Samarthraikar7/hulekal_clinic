@@ -289,8 +289,8 @@ export const PatientDashboard: React.FC<PatientDashboardProps> = ({ onNavigate, 
                       </div>
 
                       <div className="text-xs flex items-center justify-between text-slate-600">
-                        <span>Mode: <strong>{apt.consultationType === 'ONLINE' ? 'Online Video' : 'In-Clinic (Sirsi)'}</strong></span>
-                        <span>Paid: <strong>₹{apt.amount}</strong></span>
+                        <span>Mode: <strong>In-Clinic (Sirsi)</strong></span>
+                        <span>Fee: <strong>₹{apt.amount}</strong></span>
                       </div>
                     </div>
 
@@ -312,18 +312,6 @@ export const PatientDashboard: React.FC<PatientDashboardProps> = ({ onNavigate, 
                         <Phone className="w-3.5 h-3.5 text-emerald-600" />
                         <span>Confirm on WhatsApp</span>
                       </a>
-
-                      {apt.consultationType === 'ONLINE' && (
-                        <a
-                          href={apt.meetingUrl || `https://meet.jit.si/HulekalClinic-Appointment-${apt.id}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg flex items-center gap-1.5 ml-auto shadow-xs"
-                        >
-                          <Video className="w-3.5 h-3.5" />
-                          <span>Join Video Consultation</span>
-                        </a>
-                      )}
                     </div>
                   </div>
                 ))}

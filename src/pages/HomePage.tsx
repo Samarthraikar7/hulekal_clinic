@@ -118,25 +118,17 @@ export const HomePage: React.FC<HomePageProps> = ({
               </div>
 
               <p className="text-base text-slate-600 max-w-2xl leading-relaxed">
-                Comprehensive, compassionate medical consultations, preventive screening, and authentic Ayurvedic wellness in Hulekal Village, Sirsi. Book your in-clinic appointment or consult online from the comfort of your home.
+                Comprehensive, compassionate medical consultations, preventive screening, and authentic Ayurvedic wellness in Hulekal Village, Sirsi. Guaranteed time slots with zero waiting time.
               </p>
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
                 <button
-                  onClick={() => onNavigate('book-appointment', { type: 'IN_CLINIC' })}
-                  className="px-6 py-3.5 bg-[#0f3b60] hover:bg-[#0c2f4d] text-white font-bold text-sm rounded-xl shadow-lg shadow-sky-900/20 flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02]"
+                  onClick={() => onNavigate('book-appointment')}
+                  className="px-8 py-3.5 bg-[#0f3b60] hover:bg-[#0c2f4d] text-white font-bold text-sm rounded-xl shadow-lg shadow-sky-900/20 flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02]"
                 >
                   <Calendar className="w-4 h-4 text-emerald-400" />
-                  <span>Book In-Clinic Appointment</span>
-                </button>
-
-                <button
-                  onClick={() => onNavigate('book-appointment', { type: 'ONLINE' })}
-                  className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-emerald-700/20 flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02]"
-                >
-                  <Video className="w-4 h-4 text-emerald-200" />
-                  <span>Consult Doctor Online</span>
+                  <span>Book an Appointment</span>
                 </button>
               </div>
 
@@ -404,8 +396,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                   icon: FileText
                 },
                 {
-                  title: 'Instant Indian Digital Payments (UPI / Cards)',
-                  desc: 'Seamless Razorpay checkout with Google Pay, PhonePe, Paytm, and Netbanking.',
+                  title: 'Guaranteed In-Clinic Time Slots',
+                  desc: 'Pre-book your exact visit time with zero waiting time at the clinic.',
                   icon: ShieldCheck
                 }
               ].map((item, idx) => (

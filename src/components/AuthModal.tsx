@@ -129,21 +129,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     }
   };
 
-  const fillQuickDemo = (role: 'patient' | 'doctor' | 'admin') => {
-    setError('');
-    setMode('login');
-    if (role === 'patient') {
-      setIdentifier('patient@gmail.com');
-      setLoginPassword('patient123');
-    } else if (role === 'doctor') {
-      setIdentifier('doctor@hulekalclinic.com');
-      setLoginPassword('doctor123');
-    } else if (role === 'admin') {
-      setIdentifier('admin@hulekalclinic.com');
-      setLoginPassword('admin123');
-    }
-  };
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
       <div className="bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh]">
@@ -198,37 +183,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           >
             New Patient Registration
           </button>
-        </div>
-
-        {/* Quick Demo Credentials helper */}
-        <div className="bg-sky-50/80 px-4 py-2.5 border-b border-sky-100 flex items-center justify-between flex-wrap gap-1.5 text-[11px]">
-          <span className="font-semibold text-sky-900 flex items-center gap-1">
-            <Sparkles className="w-3.5 h-3.5 text-sky-600" />
-            <span>Instant Demo Fill:</span>
-          </span>
-          <div className="flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={() => fillQuickDemo('patient')}
-              className="px-2 py-0.5 bg-white hover:bg-sky-100 text-sky-800 font-medium rounded-md border border-sky-200 transition-colors shadow-2xs"
-            >
-              Patient
-            </button>
-            <button
-              type="button"
-              onClick={() => fillQuickDemo('doctor')}
-              className="px-2 py-0.5 bg-white hover:bg-sky-100 text-sky-800 font-medium rounded-md border border-sky-200 transition-colors shadow-2xs"
-            >
-              Dr. Manjushree
-            </button>
-            <button
-              type="button"
-              onClick={() => fillQuickDemo('admin')}
-              className="px-2 py-0.5 bg-white hover:bg-sky-100 text-sky-800 font-medium rounded-md border border-sky-200 transition-colors shadow-2xs"
-            >
-              Admin
-            </button>
-          </div>
         </div>
 
         {/* Scrollable form body */}

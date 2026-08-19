@@ -36,7 +36,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
 
             <p className="text-sm text-slate-400 leading-relaxed">
-              Quality healthcare for the whole family. Offering integrated general consultations, Ayurvedic wellness, preventive screening, and digital telehealth under the guidance of Dr. Manjushree Ramachandra V.
+              Quality healthcare for the whole family. Offering integrated general consultations, Ayurvedic wellness, preventive screening, and chronic care under the guidance of Dr. Manjushree Ramachandra V.
             </p>
 
             <div className="pt-2">
@@ -88,16 +88,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   className="hover:text-sky-400 transition-colors flex items-center gap-1.5"
                 >
                   <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Book In-Clinic Slot</span>
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('book-appointment', { type: 'ONLINE' })}
-                  className="hover:text-sky-400 transition-colors flex items-center gap-1.5"
-                >
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Online Teleconsultation</span>
+                  <span>Book Appointment</span>
                 </button>
               </li>
               <li>

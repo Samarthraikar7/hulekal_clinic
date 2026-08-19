@@ -597,7 +597,7 @@
       "createdAt": "2026-08-18T16:13:01.737Z",
       "updatedAt": "2026-08-18T16:13:01.777Z",
       "paymentId": "pay_test_rzp_2026_8899",
-      "paymentMethod": "Razorpay Test Mode (UPI)"
+      "paymentMethod": "In-Clinic Counter"
     },
     {
       "id": "apt-8774fbb9",

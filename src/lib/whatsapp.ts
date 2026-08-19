@@ -20,7 +20,7 @@ export function getAppointmentWhatsAppUrl(appointment: Partial<Appointment>): st
 Appointment Booking Ref: ${appointment.appointmentNo || 'HC-Pending'}
 Patient Name: ${appointment.patientName || 'Patient'}
 Service: ${appointment.serviceName || 'General Consultation'}
-Mode: ${appointment.consultationType === 'ONLINE' ? 'Online Video Call' : 'In-Clinic (Sirsi)'}
+Mode: In-Clinic (Sirsi)
 Date & Time: ${appointment.appointmentDate} at ${appointment.appointmentTime}
 Payment Status: ${appointment.paymentStatus || 'Pending'}
 Phone: ${appointment.patientPhone || ''}

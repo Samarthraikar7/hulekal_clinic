@@ -13,7 +13,7 @@ import { DoctorPage } from './pages/DoctorPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { BookAppointmentPage } from './pages/BookAppointmentPage';
-import { ConsultationRoomPage } from './pages/ConsultationRoomPage';
+
 import { PatientDashboard } from './pages/PatientDashboard';
 import { DoctorDashboard } from './pages/DoctorDashboard';
 import { AdminDashboard } from './pages/AdminDashboard';
@@ -113,16 +113,8 @@ function MainApp() {
         {currentPage === 'book-appointment' && (
           <BookAppointmentPage
             onNavigate={navigate}
-            initialType={pageParams.type}
             initialServiceId={pageParams.serviceId}
             onOpenAuth={() => setIsAuthOpen(true)}
-          />
-        )}
-
-        {currentPage === 'consultation-room' && (
-          <ConsultationRoomPage
-            appointmentId={pageParams.appointmentId || ''}
-            onNavigate={navigate}
           />
         )}
 

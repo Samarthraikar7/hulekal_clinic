@@ -292,7 +292,7 @@ export function generateAppointmentReceiptPDF(appointment: Appointment, settings
   doc.setFont('helvetica', 'bold');
   doc.text('Type:', rightX, y + 30);
   doc.setFont('helvetica', 'normal');
-  doc.text(appointment.consultationType === 'ONLINE' ? 'Online Teleconsultation' : 'In-Clinic Consultation (Sirsi)', rightX + 25, y + 30);
+  doc.text('In-Clinic Consultation (Sirsi)', rightX + 25, y + 30);
 
   doc.setFont('helvetica', 'bold');
   doc.text('Date:', leftX, y + 40);
@@ -335,19 +335,11 @@ export function generateAppointmentReceiptPDF(appointment: Appointment, settings
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(60, 60, 60);
   doc.setFontSize(8.5);
-  if (appointment.consultationType === 'ONLINE') {
-    doc.text('• Please log in to your Hulekal Clinic patient portal 5 minutes prior to the scheduled consultation.', 14, y);
-    y += 5;
-    doc.text('• Click "Join Consultation" from your dashboard to connect directly with Dr. Manjushree Ramachandra V.', 14, y);
-    y += 5;
-    doc.text('• Ensure good internet connectivity, camera, and microphone permissions are enabled.', 14, y);
-  } else {
-    doc.text('• Please arrive at Hulekal Clinic, Ramnagar, Vanalli Road 10 minutes before your slot.', 14, y);
-    y += 5;
-    doc.text('• Bring previous medical reports, prescriptions, or laboratory tests if applicable.', 14, y);
-    y += 5;
-    doc.text('• Clinic contact number for directions: +91 94837 87702.', 14, y);
-  }
+  doc.text('• Please arrive at Hulekal Clinic 10 minutes before your appointment slot.', 14, y);
+  y += 5;
+  doc.text('• Bring previous medical reports, prescriptions, or laboratory tests if applicable.', 14, y);
+  y += 5;
+  doc.text('• Clinic contact number for directions: +91 94837 87702.', 14, y);
 
   // Footer
   doc.setFillColor(245, 247, 250);

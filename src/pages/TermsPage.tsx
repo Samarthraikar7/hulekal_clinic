@@ -33,24 +33,24 @@ export const TermsPage: React.FC<TermsPageProps> = ({ onNavigate }) => {
             1. Scope of Medical Services
           </h3>
           <p>
-            Hulekal Clinic offers integrated General Medicine, Ayurvedic healthcare, and preventive consultation led by Dr. Manjushree Ramachandra V (Reg. No. 57749). Services include in-clinic consultations at Hulekal village (Sirsi taluk) and online video teleconsultations.
+            Hulekal Clinic offers integrated General Medicine, Ayurvedic healthcare, and preventive consultation led by Dr. Manjushree Ramachandra V (Reg. No. 57749). Services include in-clinic consultations at Hulekal village (Sirsi taluk).
           </p>
         </section>
 
         <section className="space-y-2">
           <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
             <ShieldAlert className="w-4 h-4 text-amber-600" />
-            2. Telemedicine Guidelines & Emergency Notice
+            2. Medical Emergency Notice
           </h3>
           <p>
-            Online video consultations are intended for non-emergency medical inquiries, routine follow-ups, and wellness guidance. In cases of critical medical emergencies, trauma, or severe chest pain, patients are advised to visit the nearest hospital or emergency room immediately.
+            In cases of critical medical emergencies, trauma, or severe chest pain, patients are advised to visit the nearest emergency hospital immediately.
           </p>
         </section>
 
         <section className="space-y-2">
-          <h3 className="text-base font-bold text-slate-900">3. Appointment Booking & Cancellations</h3>
+          <h3 className="text-base font-bold text-slate-900">3. Appointment Booking & Rescheduling</h3>
           <p>
-            Appointment slots are locked upon successful payment via Razorpay. Rescheduling or cancellation can be initiated via the Patient Dashboard or by contacting the clinic desk at least 2 hours before the scheduled time slot.
+            Appointment slots are locked upon confirmation. Rescheduling or cancellation can be initiated via the Patient Dashboard or by contacting the clinic desk at +91 94837 87702.
           </p>
         </section>
 

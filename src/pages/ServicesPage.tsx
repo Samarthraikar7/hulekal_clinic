@@ -175,21 +175,13 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate }) => {
                 </div>
               </div>
 
-              <div className="space-y-2 pt-2">
+              <div className="pt-2">
                 <button
-                  onClick={() => onNavigate('book-appointment', { serviceId: srv.id, type: 'IN_CLINIC' })}
+                  onClick={() => onNavigate('book-appointment', { serviceId: srv.id })}
                   className="w-full py-2.5 bg-[#0f3b60] hover:bg-[#0c2f4d] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-xs"
                 >
                   <Calendar className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Book In-Clinic Slot</span>
-                </button>
-
-                <button
-                  onClick={() => onNavigate('book-appointment', { serviceId: srv.id, type: 'ONLINE' })}
-                  className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-xs"
-                >
-                  <Video className="w-3.5 h-3.5 text-emerald-200" />
-                  <span>Book Online Video Call</span>
+                  <span>Book Appointment Slot</span>
                 </button>
               </div>
             </div>

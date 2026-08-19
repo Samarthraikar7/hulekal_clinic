@@ -443,7 +443,7 @@ apiRouter.post('/appointments/create-order', authenticateToken, (req: AuthReques
       notes
     } = req.body;
 
-    if (!doctorId || !serviceId || !consultationType || !appointmentDate || !appointmentTime) {
+    if (!doctorId || !serviceId || !appointmentDate || !appointmentTime) {
       return res.status(400).json({ error: 'Missing required appointment booking details.' });
     }
 
@@ -455,8 +455,6 @@ apiRouter.post('/appointments/create-order', authenticateToken, (req: AuthReques
 
     // Calculate end time
     const slotEndTime = calculateSlotEndTime(appointmentTime, service.durationMinutes || 30);
-
-    const amount = consultationType === 'ONLINE' ? (doctor.onlineFee || service.fee) : service.fee;
 
     // Atomically create appointment in database with double-booking lock
     const bookingResult = db.createAppointment({
@@ -470,15 +468,15 @@ apiRouter.post('/appointments/create-order', authenticateToken, (req: AuthReques
       doctorName: doctor.name,
       serviceId: service.id,
       serviceName: service.name,
-      consultationType: consultationType as ConsultationType,
+      consultationType: 'IN_CLINIC',
       appointmentDate,
       appointmentTime,
       slotEndTime,
-      amount,
+      amount: service.fee,
       symptoms,
       notes,
-      paymentStatus: 'PENDING',
-      appointmentStatus: 'PENDING'
+      paymentStatus: 'IN_CLINIC',
+      appointmentStatus: 'CONFIRMED'
     });
 
     if (!bookingResult.success || !bookingResult.appointment) {
@@ -487,202 +485,17 @@ apiRouter.post('/appointments/create-order', authenticateToken, (req: AuthReques
 
     const appointment = bookingResult.appointment;
     
-    // Dispatch background new appointment email notification
+    // Dispatch background new appointment & confirmation email notifications
     sendNewAppointmentEmail(appointment, req.user?.email).catch(err => console.warn('Email dispatch warning:', err));
-
-    const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
-    const razorpayKeySecret = process.env.RAZORPAY_KEY_SECRET;
-
-    const isConfigured = Boolean(
-      razorpayKeyId &&
-      razorpayKeySecret &&
-      !razorpayKeyId.includes('placeholder') &&
-      !razorpayKeySecret.includes('placeholder')
-    );
-
-    const razorpayData = isConfigured ? {
-      key: razorpayKeyId,
-      amount: amount * 100, // in paise for Razorpay
-      currency: 'INR',
-      name: 'Hulekal Clinic',
-      description: `${service.name} (${consultationType === 'ONLINE' ? 'Online Video' : 'In-Clinic'})`,
-      order_id: `order_${appointment.id}`,
-      prefill: {
-        name: appointment.patientName,
-        email: appointment.patientEmail,
-        contact: appointment.patientPhone
-      },
-      notes: {
-        appointmentId: appointment.id,
-        appointmentNo: appointment.appointmentNo
-      },
-      theme: {
-        color: '#0f3b60'
-      }
-    } : null;
+    sendAppointmentConfirmationEmail(appointment, req.user?.email).catch(err => console.warn('Email dispatch warning:', err));
 
     return res.status(201).json({
-      message: 'Appointment reserved successfully.',
-      appointment,
-      isRazorpayConfigured: isConfigured,
-      razorpay: razorpayData
+      message: 'Appointment confirmed successfully!',
+      appointment
     });
   } catch (error: any) {
-    console.error('Create appointment order error:', error);
-    return res.status(500).json({ error: 'Failed to initiate appointment booking.' });
-  }
-});
-
-// Verify Payment & Confirm Appointment
-apiRouter.post('/appointments/verify-payment', authenticateToken, (req: AuthRequest, res: Response) => {
-  try {
-    const { appointmentId, razorpay_payment_id, razorpay_order_id, razorpay_signature, paymentMethod } = req.body;
-    if (!appointmentId) {
-      return res.status(400).json({ error: 'Appointment ID is required.' });
-    }
-
-    const appointment = db.getAppointmentById(appointmentId);
-    if (!appointment) {
-      return res.status(404).json({ error: 'Appointment not found.' });
-    }
-
-    // Check ownership: Patient cannot confirm payment for another patient's appointment
-    if (req.user && req.user.role === 'PATIENT' && appointment.patientId !== req.user.id) {
-      return res.status(403).json({ error: 'Forbidden: You cannot confirm payment for another patient\'s appointment.' });
-    }
-
-    // Prevent duplicate confirmation for already paid appointments
-    if (appointment.paymentStatus === 'SUCCESS') {
-      return res.status(400).json({ error: 'This appointment payment has already been completed and confirmed.' });
-    }
-
-    const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
-    const razorpaySecret = process.env.RAZORPAY_KEY_SECRET;
-
-    const isConfigured = razorpayKeyId &&
-      razorpaySecret &&
-      !razorpayKeyId.includes('placeholder') &&
-      !razorpaySecret.includes('placeholder');
-
-    if (!isConfigured) {
-      return res.status(400).json({
-        status: 'BLOCKED',
-        reason: 'TEST CREDENTIALS NOT CONFIGURED',
-        error: 'RAZORPAY = BLOCKED | Reason = TEST CREDENTIALS NOT CONFIGURED (RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET environment variables are missing).'
-      });
-    }
-
-    // Verify signature if Razorpay secret is set
-    if (razorpay_signature && razorpay_order_id && razorpay_payment_id) {
-      const generatedSignature = crypto
-        .createHmac('sha256', razorpaySecret)
-        .update(`${razorpay_order_id}|${razorpay_payment_id}`)
-        .digest('hex');
-
-      if (generatedSignature !== razorpay_signature) {
-        db.updateAppointment(appointmentId, { paymentStatus: 'FAILED' });
-        return res.status(400).json({ error: 'Invalid payment signature. Verification failed.' });
-      }
-    }
-
-    const paymentId = razorpay_payment_id || `pay_${Date.now()}_${Math.floor(1000 + Math.random() * 9000)}`;
-
-    // Update appointment status to CONFIRMED and payment to SUCCESS
-    const updated = db.updateAppointment(appointmentId, {
-      paymentStatus: 'SUCCESS',
-      appointmentStatus: 'CONFIRMED',
-      paymentId,
-      orderId: razorpay_order_id || appointment.orderId,
-      paymentMethod: paymentMethod || 'UPI / Razorpay'
-    });
-
-    if (updated) {
-      sendAppointmentConfirmationEmail(updated, req.user?.email).catch(err => console.warn('Email dispatch warning:', err));
-    }
-
-    return res.json({
-      message: 'Payment verified successfully! Your appointment is confirmed.',
-      appointment: updated
-    });
-  } catch (error: any) {
-    console.error('Payment verification error:', error);
-    return res.status(500).json({ error: 'Payment verification failed.' });
-  }
-});
-
-// Option A: Pay at Clinic
-apiRouter.post('/appointments/:id/pay-at-clinic', authenticateToken, (req: AuthRequest, res: Response) => {
-  const appointment = db.getAppointmentById(req.params.id);
-  if (!appointment) return res.status(404).json({ error: 'Appointment not found.' });
-
-  if (req.user?.role === 'PATIENT' && appointment.patientId !== req.user.id) {
-    return res.status(403).json({ error: 'Access denied.' });
-  }
-
-  const updated = db.updateAppointment(req.params.id, {
-    paymentStatus: 'Pay at Clinic' as any,
-    appointmentStatus: 'CONFIRMED',
-    paymentMethod: 'Pay at Clinic'
-  });
-
-  if (updated) {
-    sendAppointmentConfirmationEmail(updated, req.user?.email).catch(err => console.warn('Email dispatch warning:', err));
-  }
-
-  return res.json({ message: 'Appointment confirmed! You can pay at the clinic counter during your visit.', appointment: updated });
-});
-
-// Option B: Direct UPI QR Code Payment
-apiRouter.post('/appointments/:id/pay-via-upi', authenticateToken, (req: AuthRequest, res: Response) => {
-  const appointment = db.getAppointmentById(req.params.id);
-  if (!appointment) return res.status(404).json({ error: 'Appointment not found.' });
-
-  if (req.user?.role === 'PATIENT' && appointment.patientId !== req.user.id) {
-    return res.status(403).json({ error: 'Access denied.' });
-  }
-
-  const updated = db.updateAppointment(req.params.id, {
-    paymentStatus: 'PENDING',
-    appointmentStatus: 'CONFIRMED',
-    paymentMethod: 'Direct UPI (QR Code)'
-  });
-
-  if (updated) {
-    sendAppointmentConfirmationEmail(updated, req.user?.email).catch(err => console.warn('Email dispatch warning:', err));
-  }
-
-  return res.json({ message: 'Appointment confirmed! Please complete your UPI payment using the QR code.', appointment: updated });
-});
-
-// Handle Payment Failure / Modal Cancellation
-apiRouter.post('/appointments/payment-failed', authenticateToken, (req: AuthRequest, res: Response) => {
-  try {
-    const { appointmentId, reason } = req.body;
-    if (!appointmentId) {
-      return res.status(400).json({ error: 'Appointment ID is required.' });
-    }
-
-    const appointment = db.getAppointmentById(appointmentId);
-    if (!appointment) {
-      return res.status(404).json({ error: 'Appointment not found.' });
-    }
-
-    if (req.user && req.user.role === 'PATIENT' && appointment.patientId !== req.user.id) {
-      return res.status(403).json({ error: 'Forbidden: Unauthorized access.' });
-    }
-
-    // Do NOT mark as SUCCESS or CONFIRMED. Set paymentStatus to FAILED
-    const updated = db.updateAppointment(appointmentId, {
-      paymentStatus: 'FAILED',
-      appointmentStatus: 'PENDING'
-    });
-
-    return res.json({
-      message: 'Payment attempt failed or was cancelled. Appointment remains unconfirmed.',
-      appointment: updated
-    });
-  } catch (error: any) {
-    return res.status(500).json({ error: 'Failed to record payment failure status.' });
+    console.error('Create appointment error:', error);
+    return res.status(500).json({ error: 'Failed to complete appointment booking.' });
   }
 });
 
@@ -709,54 +522,7 @@ apiRouter.get('/appointments/:id', authenticateToken, (req: AuthRequest, res: Re
   return res.json({ appointment, prescription });
 });
 
-// Telehealth Video Room Access Endpoint (With Video Provider Check & Authorization)
-apiRouter.get('/consultation/room-access/:id', authenticateToken, (req: AuthRequest, res: Response) => {
-  const appointment = db.getAppointmentById(req.params.id);
-  if (!appointment) {
-    return res.status(404).json({ error: 'Appointment not found.' });
-  }
 
-  // 1. Check Video Provider Configuration
-  const videoApiKey = process.env.VIDEO_API_KEY;
-  const isVideoConfigured = videoApiKey &&
-    !videoApiKey.includes('placeholder') &&
-    !videoApiKey.includes('token') &&
-    videoApiKey.trim().length > 10;
-
-  if (!isVideoConfigured) {
-    return res.status(400).json({
-      status: 'BLOCKED',
-      reason: 'VIDEO PROVIDER NOT CONFIGURED',
-      error: 'ONLINE CONSULTATION = BLOCKED | Reason = VIDEO PROVIDER NOT CONFIGURED (VIDEO_API_KEY environment variable is missing).'
-    });
-  }
-
-  // 2. Authorization Check: Authorized Patient or Doctor/Admin only
-  if (!req.user) {
-    return res.status(401).json({ error: 'Unauthorized.' });
-  }
-
-  const isAuthorizedPatient = req.user.id === appointment.patientId;
-  const isAuthorizedDoctor = req.user.role === 'DOCTOR' || req.user.role === 'ADMIN' || req.user.id === appointment.doctorId;
-
-  if (!isAuthorizedPatient && !isAuthorizedDoctor) {
-    return res.status(403).json({
-      status: 'DENIED',
-      error: 'Access denied: Unrelated users cannot enter this private video consultation room.'
-    });
-  }
-
-  return res.json({
-    status: 'GRANTED',
-    message: 'Authorized access granted to video consultation room.',
-    roomUrl: appointment.meetingUrl || `/consultation/room/${appointment.id}`,
-    role: isAuthorizedDoctor ? 'DOCTOR' : 'PATIENT',
-        user: {
-      name: req.user.name,
-      role: req.user.role
-    }
-  });
-});
 
 // Notification Provider Status & Verification Endpoint
 apiRouter.get('/notifications/provider-status', (req: Request, res: Response) => {
@@ -1007,14 +773,8 @@ apiRouter.get('/admin/overview', authenticateToken, requireRole(['ADMIN', 'DOCTO
   const todayAppointments = data.appointments.filter(a => a.appointmentDate === today).length;
   const upcomingAppointments = data.appointments.filter(a => a.appointmentDate >= today && a.appointmentStatus === 'CONFIRMED').length;
   const completedConsultations = data.appointments.filter(a => a.appointmentStatus === 'COMPLETED').length;
-  const onlineConsultations = data.appointments.filter(a => a.consultationType === 'ONLINE' && a.paymentStatus === 'SUCCESS').length;
-  const inClinicConsultations = data.appointments.filter(a => a.consultationType === 'IN_CLINIC' && a.paymentStatus === 'SUCCESS').length;
-
-  const totalRevenue = data.appointments
-    .filter(a => a.paymentStatus === 'SUCCESS')
-    .reduce((sum, a) => sum + (a.amount || 0), 0);
-
-  const pendingPayments = data.appointments.filter(a => a.paymentStatus === 'PENDING').length;
+  const inClinicAppointments = data.appointments.filter(a => a.appointmentStatus === 'CONFIRMED' || a.appointmentStatus === 'COMPLETED').length;
+  const confirmedAppointments = data.appointments.filter(a => a.appointmentStatus === 'CONFIRMED').length;
   const cancelledAppointments = data.appointments.filter(a => a.appointmentStatus === 'CANCELLED').length;
 
   // Service popularity breakdown
@@ -1028,8 +788,6 @@ apiRouter.get('/admin/overview', authenticateToken, requireRole(['ADMIN', 'DOCTO
     count: serviceCountMap[name]
   }));
 
-  const confirmedAppointments = data.appointments.filter(a => a.appointmentStatus === 'CONFIRMED' || a.appointmentStatus === 'COMPLETED').length;
-
   return res.json({
     kpis: {
       totalPatients,
@@ -1037,18 +795,15 @@ apiRouter.get('/admin/overview', authenticateToken, requireRole(['ADMIN', 'DOCTO
       todayAppointments,
       upcomingAppointments,
       completedConsultations,
-      onlineConsultations,
-      inClinicConsultations,
-      totalRevenue,
-      pendingPayments,
+      inClinicAppointments,
+      confirmedAppointments,
       cancelledAppointments
     },
     stats: {
       totalAppointments,
       confirmedAppointments,
-      totalRevenue,
-      inClinicAppointments: inClinicConsultations,
-      onlineAppointments: onlineConsultations
+      completedAppointments: completedConsultations,
+      inClinicAppointments
     },
     servicePopularity,
     recentAppointments: data.appointments.slice(-8).reverse()

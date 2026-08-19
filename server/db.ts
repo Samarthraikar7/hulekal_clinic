@@ -265,7 +265,7 @@ class Database {
       doctorName: primaryDoctor.name,
       serviceId: defaultServices[0].id,
       serviceName: defaultServices[0].name,
-      consultationType: 'ONLINE',
+      consultationType: 'IN_CLINIC',
       appointmentDate: today,
       appointmentTime: '16:30',
       slotEndTime: '17:00',
@@ -512,14 +512,14 @@ class Database {
     doctorName: string;
     serviceId: string;
     serviceName: string;
-    consultationType: 'IN_CLINIC' | 'ONLINE';
+    consultationType: 'IN_CLINIC';
     appointmentDate: string;
     appointmentTime: string;
     slotEndTime: string;
     amount: number;
     symptoms?: string;
     notes?: string;
-    paymentStatus?: 'PENDING' | 'SUCCESS';
+    paymentStatus?: string;
     appointmentStatus?: 'PENDING' | 'CONFIRMED';
   }): { success: boolean; appointment?: Appointment; error?: string } {
     // Check double booking atomically
@@ -548,16 +548,13 @@ class Database {
       doctorName: data.doctorName,
       serviceId: data.serviceId,
       serviceName: data.serviceName,
-      consultationType: data.consultationType,
+      consultationType: 'IN_CLINIC',
       appointmentDate: data.appointmentDate,
       appointmentTime: data.appointmentTime,
       slotEndTime: data.slotEndTime,
       amount: data.amount,
-      paymentStatus: data.paymentStatus || 'PENDING',
-      appointmentStatus: data.appointmentStatus || 'PENDING',
-      orderId: `order_${aptId}`,
-      meetingUrl: data.consultationType === 'ONLINE' ? `https://meet.jit.si/HulekalClinic-Appointment-${aptId}` : undefined,
-      meetingId: data.consultationType === 'ONLINE' ? `HulekalClinic-Appointment-${aptId}` : undefined,
+      paymentStatus: 'IN_CLINIC',
+      appointmentStatus: data.appointmentStatus || 'CONFIRMED',
       symptoms: data.symptoms,
       notes: data.notes,
       createdAt: new Date().toISOString(),

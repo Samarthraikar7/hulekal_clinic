@@ -46,7 +46,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onNavigate }) => {
           <ul className="list-disc pl-5 space-y-1 text-slate-600">
             <li>Personal Identifiers: Full name, age, gender, contact number, and email address.</li>
             <li>Clinical Data: Reported symptoms, medical history, vital signs, and doctor consultation notes.</li>
-            <li>Payment Records: Transaction reference IDs and order numbers processed via secure gateway (Razorpay).</li>
+            <li>Appointment Data: Preferred consultation dates, time slots, and booking reference numbers.</li>
           </ul>
         </section>
 

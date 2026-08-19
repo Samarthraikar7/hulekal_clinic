@@ -100,19 +100,11 @@ export const DoctorPage: React.FC<DoctorPageProps> = ({ onNavigate }) => {
             {/* Consultation Booking Actions */}
             <div className="flex flex-wrap gap-3 pt-3">
               <button
-                onClick={() => onNavigate('book-appointment', { type: 'IN_CLINIC' })}
+                onClick={() => onNavigate('book-appointment')}
                 className="px-5 py-3 bg-[#0f3b60] hover:bg-[#0c2f4d] text-white text-xs font-bold rounded-xl flex items-center gap-2 shadow-md transition-colors"
               >
                 <Calendar className="w-4 h-4 text-emerald-400" />
-                <span>Book In-Clinic Slot (₹250)</span>
-              </button>
-
-              <button
-                onClick={() => onNavigate('book-appointment', { type: 'ONLINE' })}
-                className="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl flex items-center gap-2 shadow-md transition-colors"
-              >
-                <Video className="w-4 h-4 text-emerald-200" />
-                <span>Book Online Video Call (₹250)</span>
+                <span>Book Appointment Slot (₹250)</span>
               </button>
 
               <a

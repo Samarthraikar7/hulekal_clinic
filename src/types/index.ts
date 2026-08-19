@@ -43,8 +43,8 @@ export interface ClinicService {
   isActive: boolean;
 }
 
-export type ConsultationType = 'IN_CLINIC' | 'ONLINE';
-export type PaymentStatus = 'PENDING' | 'SUCCESS' | 'FAILED' | 'REFUNDED';
+export type ConsultationType = 'IN_CLINIC';
+export type PaymentStatus = 'IN_CLINIC' | 'CONFIRMED';
 export type AppointmentStatus = 'PENDING' | 'CONFIRMED' | 'COMPLETED' | 'CANCELLED' | 'NO_SHOW';
 
 export interface Appointment {
@@ -65,7 +65,7 @@ export interface Appointment {
   appointmentTime: string; // HH:mm
   slotEndTime: string; // HH:mm
   amount: number;
-  paymentStatus: PaymentStatus;
+  paymentStatus?: string;
   appointmentStatus: AppointmentStatus;
   paymentId?: string;
   orderId?: string;

@@ -211,7 +211,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate, onOp
           }`}
         >
           <BarChart3 className="w-4 h-4" />
-          <span>Analytics & Revenue</span>
+          <span>Analytics & Overview</span>
         </button>
 
         <button
@@ -267,7 +267,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate, onOp
       {activeTab === 'OVERVIEW' && stats && (
         <div className="space-y-8">
           {/* KPI Metrics */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
               <span className="text-xs font-bold text-slate-500">TOTAL APPOINTMENTS</span>
               <div className="flex items-baseline justify-between">
@@ -279,26 +279,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate, onOp
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
-              <span className="text-xs font-bold text-slate-500">TOTAL REVENUE COLLECTED</span>
-              <div className="flex items-baseline justify-between">
-                <span className="text-2xl font-black text-emerald-800">₹{stats.totalRevenue}</span>
-                <span className="text-[10px] text-slate-400 font-semibold">Razorpay UPI/Cards</span>
-              </div>
-            </div>
-
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
               <span className="text-xs font-bold text-slate-500">IN-CLINIC VISITS</span>
               <div className="flex items-baseline justify-between">
-                <span className="text-2xl font-black text-sky-800">{stats.inClinicAppointments}</span>
-                <span className="text-[10px] text-sky-600 font-semibold">Hulekal Shop No. 3</span>
+                <span className="text-2xl font-black text-sky-800">{stats.inClinicAppointments || stats.totalAppointments}</span>
+                <span className="text-[10px] text-sky-600 font-semibold">Sirsi Hancharata</span>
               </div>
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs space-y-1">
-              <span className="text-xs font-bold text-slate-500">TELEHEALTH VIDEO CALLS</span>
+              <span className="text-xs font-bold text-slate-500">COMPLETED CONSULTATIONS</span>
               <div className="flex items-baseline justify-between">
-                <span className="text-2xl font-black text-purple-800">{stats.onlineAppointments}</span>
-                <span className="text-[10px] text-purple-600 font-semibold">Remote Consults</span>
+                <span className="text-2xl font-black text-emerald-800">{stats.completedAppointments || 0}</span>
+                <span className="text-[10px] text-emerald-600 font-semibold">Rx Generated</span>
               </div>
             </div>
           </div>
@@ -382,16 +374,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onNavigate, onOp
                         </select>
                       </td>
                       <td className="p-3.5 text-right space-x-2">
-                        {apt.consultationType === 'ONLINE' && (
-                          <a
-                            href={apt.meetingUrl || `https://meet.jit.si/HulekalClinic-Appointment-${apt.id}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-emerald-700 hover:underline font-bold text-xs"
-                          >
-                            Jitsi Room
-                          </a>
-                        )}
 
                         <a
                           href={getDoctorPatientWhatsAppUrl(apt.patientPhone, `Namaste ${apt.patientName}, Hulekal Clinic Desk here regarding your booking ${apt.appointmentNo}.`)}
